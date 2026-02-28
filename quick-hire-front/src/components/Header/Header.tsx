@@ -1,0 +1,65 @@
+import React from "react";
+import Image from "next/image";
+
+const Header: React.FC = () => {
+  return (
+    <header className="w-full min-h-0 md:min-h-screen flex items-center justify-center px-5 md:px-10 py-24 md:pt-24 md:pb-0 bg-light-bg overflow-hidden relative">
+      {/* Background Pattern - visible on all screen sizes */}
+      <div className="absolute top-0 right-0 w-[80%] md:w-[50%] h-full z-0 opacity-30 md:opacity-60 pointer-events-none">
+        <Image
+          src="/assets/images/hero_pattern.png"
+          alt=""
+          fill
+          className="object-contain"
+        />
+      </div>
+      <div className="w-full max-w-[1200px] flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="flex-1 z-10">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold font-clash leading-tight text-zinc-800 mb-4 md:mb-6 relative">
+            Discover <br />
+            more than <br />
+            <span className="relative inline-block">
+              <span className="text-light-blue">5000+ Jobs</span>
+              <div className="absolute -bottom-5 md:-bottom-6 left-0 w-full">
+                <Image
+                  src="/assets/images/horizontal_line.png"
+                  alt="Underline"
+                  width={400}
+                  height={12}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </span>
+          </h1>
+          <p className="text-base md:text-xl leading-relaxed text-zinc-500 max-w-[480px] mb-6 md:mb-10">
+            Great platform for the job seeker that searching for new career
+            heights and passionate about startups.
+          </p>
+          <button className="bg-primary text-white text-base md:text-lg font-semibold px-8 md:px-12 py-4 md:py-5 rounded-[4px] hover:bg-primary-hover transition-all transform hover:-translate-y-0.5">
+            Browse Jobs
+          </button>
+
+          <div className="mt-8 text-sm text-zinc-400">
+            <span>Popular: </span>
+            <strong className="text-zinc-600 ml-2">
+              UI Designer, UX Researcher, Android, Admin
+            </strong>
+          </div>
+        </div>
+        <div className="hidden md:flex flex-1 relative justify-center md:justify-end items-center">
+          <div className="relative z-10 md:translate-x-5">
+            <Image
+              src="/assets/images/person_1.png"
+              alt="Person pointing at jobs"
+              width={500}
+              height={600}
+              priority
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
