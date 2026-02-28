@@ -130,7 +130,7 @@ export default async function FeaturedJobs() {
             {jobs.map((job) => (
               <div
                 key={job._id}
-                className="min-w-[280px] sm:min-w-0 flex-shrink-0 snap-start"
+                className="min-w-[280px] sm:min-w-0 shrink-0 snap-start"
               >
                 <JobCard job={job} />
               </div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="fixed top-0 left-0 w-full h-16 md:h-20 flex items-center justify-center px-5 md:px-10 bg-white/80 backdrop-blur-md border-b border-zinc-100 z-[1000]">
+    <nav className="fixed top-0 left-0 w-full h-16 md:h-20 flex items-center justify-center px-5 md:px-10 bg-white/80 backdrop-blur-md border-b border-zinc-100 z-1000">
       <div className="w-full max-w-[1200px] flex justify-between items-center">
         <div className="flex items-center gap-10">
           <Link href="/" className="flex items-center">
