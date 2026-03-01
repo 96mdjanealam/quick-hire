@@ -52,3 +52,24 @@ export const deleteApplication = async (
     next(error);
   }
 };
+
+// @desc    Get all job applications
+// @route   GET /api/applications
+// @access  Private/Admin
+export const getApplications = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const applications = await Application.find()
+      .populate("job_id", "title company")
+      .sort({ created_at: -1 });
+
+    res
+      .status(200)
+      .json({ success: true, count: applications.length, data: applications });
+  } catch (error) {
+    next(error);
+  }
+};

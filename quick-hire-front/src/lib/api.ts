@@ -1,6 +1,6 @@
 import { JobsApiResponse } from "@/types/job";
 
-const BASE_URL = "https://quick-hire-server.vercel.app";
+const BASE_URL = process.env.BACKEND_API_URL || "http://localhost:5000";
 
 export async function fetchJobs(): Promise<JobsApiResponse> {
   const res = await fetch(`${BASE_URL}/api/jobs/`, {
