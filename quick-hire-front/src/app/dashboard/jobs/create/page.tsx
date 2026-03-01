@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { ChangeEvent, useRef, useState, SubmitEvent } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Image as ImageIcon } from "lucide-react";
@@ -10,11 +10,23 @@ export default function CreateJobPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fileName, setFileName] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  // Create a ref for the form to reset it if needed
-  const formRef = React.useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFileName(file.name);
+      setPreviewUrl(URL.createObjectURL(file));
+    } else {
+      setFileName(null);
+      setPreviewUrl(null);
+    }
+  };
+
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -110,7 +122,7 @@ export default function CreateJobPage() {
                 className="border border-zinc-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 bg-white"
               >
                 <option value="">Select a category</option>
-                <option value="software">Software Development</option>
+                <option value="software">Software</option>
                 <option value="engineering">Engineering</option>
                 <option value="marketing">Marketing</option>
                 <option value="design">Design</option>
@@ -165,24 +177,42 @@ export default function CreateJobPage() {
             </label>
             <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-zinc-200 border-dashed rounded-lg bg-zinc-50 hover:bg-zinc-100 transition-colors">
               <div className="space-y-1 text-center">
-                <ImageIcon className="mx-auto h-12 w-12 text-zinc-400" />
+                {previewUrl ? (
+                  <div className="flex flex-col items-center gap-2 mb-3">
+                    <img
+                      src={previewUrl}
+                      alt="Preview"
+                      className="h-16 w-16 object-contain rounded-md bg-white border border-zinc-200 p-1"
+                    />
+                    <p className="text-sm text-zinc-700 font-medium truncate max-w-xs">
+                      {fileName}
+                    </p>
+                  </div>
+                ) : (
+                  <ImageIcon className="mx-auto h-12 w-12 text-zinc-400 mb-3" />
+                )}
                 <div className="flex text-sm text-zinc-600 justify-center">
                   <label
                     htmlFor="logo"
-                    className="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary/80 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary px-2"
+                    className="relative cursor-pointer bg-white rounded-md font-medium text-primary hover:text-primary/80 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-primary px-2 py-0.5"
                   >
-                    <span>Upload a file</span>
+                    <span>{fileName ? "Change file" : "Upload a file"}</span>
                     <input
                       id="logo"
                       name="logo"
                       type="file"
                       className="sr-only"
                       accept="image/*"
+                      onChange={handleFileChange}
                     />
                   </label>
-                  <p className="pl-1">or drag and drop</p>
+                  {!fileName && <p className="pl-1 py-0.5">or drag and drop</p>}
                 </div>
-                <p className="text-xs text-zinc-500">PNG, JPG, GIF up to 5MB</p>
+                {!fileName && (
+                  <p className="text-xs text-zinc-500 mt-2">
+                    PNG, JPG, GIF up to 5MB
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -190,14 +220,14 @@ export default function CreateJobPage() {
           <div className="pt-4 border-t border-zinc-100 flex justify-end gap-3">
             <Link
               href="/dashboard/jobs"
-              className="px-6 py-3 border border-zinc-200 text-zinc-600 font-bold rounded-lg hover:bg-zinc-50 transition-colors"
+              className="px-6 py-3 border border-zinc-200 text-zinc-600 font-bold rounded-[4px] hover:bg-zinc-50 transition-colors"
             >
               Cancel
             </Link>
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-3 bg-primary text-secondary font-bold rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+              className="bg-primary text-white px-5 md:px-7 py-2.5 md:py-3 rounded-[4px] font-semibold text-sm md:text-base hover:bg-primary-hover transition-all transform hover:-translate-y-px active:translate-y-0 disabled:transform-none disabled:hover:bg-primary disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {loading ? "Publishing..." : "Publish Job"}
             </button>

@@ -11,7 +11,6 @@ export default async function DashboardPage() {
     const jobsRes = await fetchJobs();
     initialJobsCount = jobsRes.count || 0;
 
-    // We try to fetch applications to get the count. If it fails (some auth issue or empty), we handle it silently for the dashboard overview.
     const appsRes = await getApplications().catch(() => ({ count: 0 }));
     initialApplicationsCount = appsRes.count || 0;
   } catch (error) {

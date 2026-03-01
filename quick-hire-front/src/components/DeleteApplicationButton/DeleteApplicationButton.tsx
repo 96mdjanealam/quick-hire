@@ -24,7 +24,7 @@ export default function DeleteApplicationButton({ id }: { id: string }) {
     <button
       onClick={handleDelete}
       disabled={loading}
-      className="p-2 bg-red-50 text-red-600 rounded-md hover:bg-red-100 transition-colors disabled:opacity-50 flex items-center gap-2 text-sm font-semibold"
+      className="p-2 bg-red-50 cursor-pointer text-red-600 rounded-md hover:bg-red-100 transition-colors disabled:opacity-50 flex items-center gap-2 text-sm font-semibold"
       title="Delete Application"
     >
       <Trash2 size={16} />

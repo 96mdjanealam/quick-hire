@@ -51,9 +51,7 @@ export default async function DashboardApplicationsPage() {
                     {app.email}
                   </a>
                 </div>
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                  <DeleteApplicationButton id={app._id} />
-                </div>
+                <DeleteApplicationButton id={app._id} />
               </div>
 
               <div className="bg-zinc-50 rounded-lg p-3 border border-zinc-100 mb-4 flex flex-col gap-2">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, SubmitEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { loginAction } from "@/app/actions/auth";
@@ -10,8 +10,15 @@ export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleAdminAutocomplete = () => {
+    setEmail("admin@gmail.com");
+    setPassword("123456");
+  };
+
+  async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     setPending(true);
     setError(null);
@@ -30,7 +37,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-light-bg px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen flex items-center justify-center bg-light-bg px-4 sm:px-6 lg:px-8 pt-24 pb-12">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
         <div className="text-center">
           <Link href="/" className="inline-block mb-6">
@@ -72,6 +79,10 @@ export default function LoginPage() {
                   type="email"
                   autoComplete="email"
                   required
+                  value={email}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setEmail(e.target.value)
+                  }
                   className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-colors bg-gray-50 focus:bg-white"
                   placeholder="you@example.com"
                 />
@@ -103,6 +114,10 @@ export default function LoginPage() {
                   type="password"
                   autoComplete="current-password"
                   required
+                  value={password}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setPassword(e.target.value)
+                  }
                   className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-colors bg-gray-50 focus:bg-white"
                   placeholder="••••••••"
                 />
@@ -110,7 +125,16 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div>
+          <div className="mt-6">
+            <div className="flex justify-end mb-4">
+              <button
+                type="button"
+                onClick={handleAdminAutocomplete}
+                className="text-xs cursor-pointer font-medium text-zinc-500 bg-zinc-100 px-3 py-1.5 rounded-[4px] hover:bg-zinc-200 transition-colors"
+              >
+                Auto-fill Admin Info
+              </button>
+            </div>
             <button
               type="submit"
               disabled={pending}
@@ -134,7 +158,7 @@ export default function LoginPage() {
           </div>
         </form>
 
-        <div className="pt-6 mt-6 border-t border-gray-100 text-center text-sm">
+        {/* <div className="pt-6 mt-6 border-t border-gray-100 text-center text-sm">
           <span className="text-gray-500">Don't have an account? </span>
           <Link
             href="/register"
@@ -142,7 +166,7 @@ export default function LoginPage() {
           >
             Create an account
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

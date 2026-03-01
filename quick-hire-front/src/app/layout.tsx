@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Epilogue } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
+import ConditionalLayout from "@/components/ConditionalLayout/ConditionalLayout";
 
 const epilogue = Epilogue({
   variable: "--font-epilogue",
@@ -27,7 +30,13 @@ export default function RootLayout({
         <title>QuickHire - Find Your Dream Job</title>
       </head>
       <body className={`${epilogue.variable} font-sans antialiased`}>
-        {children}
+        <ConditionalLayout>
+          <Navbar />
+        </ConditionalLayout>
+        <main className="min-h-screen bg-white">{children}</main>
+        <ConditionalLayout>
+          <Footer />
+        </ConditionalLayout>
       </body>
     </html>
   );

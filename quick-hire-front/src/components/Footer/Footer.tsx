@@ -29,31 +29,31 @@ const Footer: React.FC = () => {
           <div className="flex flex-col gap-4">
             <h4 className="text-base font-bold mb-2">About</h4>
             <Link
-              href="/companies"
+              href="#"
               className="text-zinc-400 text-sm hover:text-white transition-colors"
             >
               Companies
             </Link>
             <Link
-              href="/pricing"
+              href="#"
               className="text-zinc-400 text-sm hover:text-white transition-colors"
             >
               Pricing
             </Link>
             <Link
-              href="/terms"
+              href="#"
               className="text-zinc-400 text-sm hover:text-white transition-colors"
             >
               Terms
             </Link>
             <Link
-              href="/advice"
+              href="#"
               className="text-zinc-400 text-sm hover:text-white transition-colors"
             >
               Advice
             </Link>
             <Link
-              href="/privacy"
+              href="#"
               className="text-zinc-400 text-sm hover:text-white transition-colors"
             >
               Privacy Policy
@@ -64,25 +64,25 @@ const Footer: React.FC = () => {
           <div className="flex flex-col gap-4">
             <h4 className="text-base font-bold mb-2">Resources</h4>
             <Link
-              href="/help"
+              href="#"
               className="text-zinc-400 text-sm hover:text-white transition-colors"
             >
               Help Docs
             </Link>
             <Link
-              href="/guide"
+              href="#"
               className="text-zinc-400 text-sm hover:text-white transition-colors"
             >
               Guide
             </Link>
             <Link
-              href="/updates"
+              href="#"
               className="text-zinc-400 text-sm hover:text-white transition-colors"
             >
               Updates
             </Link>
             <Link
-              href="/contact"
+              href="#"
               className="text-zinc-400 text-sm hover:text-white transition-colors"
             >
               Contact Us

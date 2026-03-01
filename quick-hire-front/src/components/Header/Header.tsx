@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Header: React.FC = () => {
   return (
@@ -35,9 +36,12 @@ const Header: React.FC = () => {
             Great platform for the job seeker that searching for new career
             heights and passionate about startups.
           </p>
-          <button className="bg-primary text-white text-base md:text-lg font-semibold px-8 md:px-12 py-4 md:py-5 rounded-[4px] hover:bg-primary-hover transition-all transform hover:-translate-y-0.5">
+          <Link
+            href="/jobs"
+            className="bg-primary text-white text-base md:text-lg font-semibold px-8 md:px-12 py-4 md:py-5 rounded-[4px] hover:bg-primary-hover transition-all transform hover:-translate-y-0.5"
+          >
             Browse Jobs
-          </button>
+          </Link>
 
           <div className="mt-8 text-sm text-zinc-400">
             <span>Popular: </span>

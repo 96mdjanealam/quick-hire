@@ -31,7 +31,7 @@ export default async function DashboardJobsPage() {
         </div>
         <Link
           href="/dashboard/jobs/create"
-          className="bg-primary text-secondary px-4 py-2 rounded-md font-bold text-sm flex items-center gap-2 hover:bg-primary/90 transition-colors"
+          className="bg-primary text-white px-4 py-2 rounded-[4px] font-bold text-sm flex items-center gap-2 hover:bg-primary/90 transition-colors"
         >
           <PlusCircle size={18} />
           Post New Job

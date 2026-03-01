@@ -24,26 +24,31 @@ const Navbar = async () => {
           </Link>
           <div className="hidden md:flex gap-8">
             <Link
-              href="/find-jobs"
+              href="/jobs"
               className="text-zinc-600 font-medium text-base hover:text-zinc-900 transition-colors"
             >
               Find Jobs
             </Link>
-            <Link
-              href="/browse-companies"
-              className="text-zinc-600 font-medium text-base hover:text-zinc-900 transition-colors"
-            >
-              Browse Companies
-            </Link>
+            {user && (
+              <Link
+                href="/dashboard"
+                className="text-zinc-600 font-medium text-base hover:text-zinc-900 transition-colors"
+              >
+                Dashboard
+              </Link>
+            )}
           </div>
         </div>
         <div className="flex items-center gap-5">
           {user ? (
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
+              <Link
+                href="/dashboard"
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              >
                 <CircleUserRound className="text-primary" />
                 <span>Admin</span>
-              </div>
+              </Link>
               <LogoutBtn />
             </div>
           ) : (

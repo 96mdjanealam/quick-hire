@@ -2,14 +2,9 @@ import React from "react";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import {
-  LayoutDashboard,
-  Briefcase,
-  PlusCircle,
-  Users,
-  LogOut,
-} from "lucide-react";
+import { LayoutDashboard, Briefcase, PlusCircle, Users } from "lucide-react";
 import LogoutBtn from "@/components/Navbar/LogoutBtn";
+import Image from "next/image";
 
 export default async function DashboardLayout({
   children,
@@ -20,7 +15,7 @@ export default async function DashboardLayout({
   const token = cookieStore.get("token")?.value;
 
   if (!token) {
-    redirect("/login");
+    redirect("/");
   }
 
   return (
@@ -28,13 +23,15 @@ export default async function DashboardLayout({
       {/* Sidebar */}
       <aside className="w-full md:w-64 bg-white border-r border-zinc-200 md:min-h-screen p-6 flex flex-col">
         <div className="mb-8">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold text-xl">
-              Q
-            </div>
-            <span className="font-bold text-xl tracking-tight text-zinc-900">
-              Quick<span className="text-primary">Hire</span>
-            </span>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/assets/images/logos/quickhire-logo.png"
+              alt="QuickHire Logo"
+              width={160}
+              height={40}
+              className="w-[120px] md:w-[160px] h-auto"
+              priority
+            />
           </Link>
         </div>
 
@@ -70,9 +67,7 @@ export default async function DashboardLayout({
         </nav>
 
         <div className="mt-auto pt-8 border-t border-zinc-100">
-          <div className="flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors font-semibold text-sm cursor-pointer">
-            <LogoutBtn />
-          </div>
+          <LogoutBtn />
         </div>
       </aside>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Shield } from "lucide-react";
 import { Job } from "@/types/job";
 
 const categoryColors: Record<string, { bg: string; text: string }> = {
@@ -45,7 +45,6 @@ export default function JobCard({ job, actionButton }: JobCardProps) {
     <div className="p-6 border border-zinc-100 rounded-sm flex flex-col gap-3 transition-all hover:shadow-lg hover:border-primary/20 bg-white group relative">
       <Link href={`/jobs/${job._id}`} className="absolute inset-0 z-0"></Link>
 
-      {/* Top: Logo + Category */}
       <div className="flex items-center justify-between z-10">
         <div className="w-12 h-12 relative rounded-lg overflow-hidden bg-zinc-50 flex items-center justify-center">
           {job.company_logo ? (
@@ -57,16 +56,14 @@ export default function JobCard({ job, actionButton }: JobCardProps) {
               className="object-contain"
             />
           ) : (
-            <span className="text-lg font-bold text-primary">
-              {job.company.charAt(0)}
-            </span>
+            <Shield size={24} className="text-primary" />
           )}
         </div>
         <div className="flex items-center gap-2">
-          {actionButton}
           <span className="border border-primary text-primary text-xs font-semibold px-4 py-1.5 rounded-[4px]">
             Full Time
           </span>
+          {actionButton}
         </div>
       </div>
 

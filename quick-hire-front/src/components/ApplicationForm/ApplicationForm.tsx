@@ -146,7 +146,7 @@ export default function ApplicationForm({ jobId }: { jobId: string }) {
       <button
         type="submit"
         disabled={loading}
-        className="mt-4 bg-primary text-secondary font-bold py-3 px-6 rounded-md hover:bg-primary/90 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+        className="mt-4 bg-primary text-white font-bold py-3 px-6 rounded-[4px] hover:bg-primary/90 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
       >
         {loading ? "Submitting..." : "Submit Application"}
       </button>

@@ -1,8 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# QuickHire - Frontend
+
+QuickHire is a modern job board application designed to connect employers with potential candidates efficiently. This repository contains the frontend implementation built with Next.js.
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/) (App Router)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Icons:** [Lucide React](https://lucide.dev/)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (Latest LTS recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository.
+2. Navigate to the `quick-hire-front` directory.
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Running Locally
+
+To start the development server:
 
 ```bash
 npm run dev
