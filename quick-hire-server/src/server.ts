@@ -37,7 +37,12 @@ if (process.env.NODE_ENV === "development") {
 
 // Security middleware
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://quick-hire-front.vercel.app"],
+    credentials: true,
+  }),
+);
 
 // Root route
 app.get("/", (req, res) => {
