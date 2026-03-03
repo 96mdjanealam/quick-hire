@@ -1,5 +1,7 @@
 # QuickHire - Modern Job Board Platform
 
+**Live Demo:** [https://quick-hire-front.vercel.app](https://quick-hire-front.vercel.app)
+
 QuickHire is a comprehensive, full-stack job board application designed to bridge the gap between talented professionals and forward-thinking companies. It features a sleek, responsive frontend and a powerful, scalable backend API.
 
 ## Project Structure
