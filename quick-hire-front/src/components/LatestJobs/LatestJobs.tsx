@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import HeroPattern from "@/assets/images/hero_pattern.png";
 import { fetchJobs } from "@/lib/api";
 import { Job } from "@/types/job";
 
@@ -66,15 +67,15 @@ function JobRow({ job }: { job: Job }) {
   const catStyle = getCategoryStyle(job.category);
 
   return (
-    <div className="flex items-start sm:items-center gap-4 md:gap-6 p-4 md:p-6 bg-white border border-zinc-100 rounded-sm hover:shadow-md hover:border-primary/20 transition-all cursor-pointer group">
+    <div className="flex items-start sm:items-center gap-4 md:gap-6 p-4 md:p-6 bg-white border border-card-border rounded-sm hover:shadow-md hover:border-primary/20 transition-all cursor-pointer group">
       {/* Logo */}
       <div className="w-12 h-12 md:w-16 md:h-16 relative rounded-lg overflow-hidden bg-zinc-50 shrink-0 flex items-center justify-center">
         {job.company_logo ? (
           <Image
             src={job.company_logo}
             alt={job.company}
-            width={64}
-            height={64}
+            fill
+            sizes="64px"
             className="object-contain"
           />
         ) : (
@@ -97,7 +98,7 @@ function JobRow({ job }: { job: Job }) {
             Full-Time
           </span>
           <span
-            className={`text-xs font-semibold px-3 py-1 rounded-full border ${catStyle.border} ${catStyle.text}`}
+            className={`px-3 py-1.5 rounded-full text-xs font-semibold ${catStyle.bg} ${catStyle.text} capitalize`}
           >
             {job.category}
           </span>
@@ -122,9 +123,10 @@ export default async function LatestJobs() {
       {/* Background Pattern */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] opacity-30 pointer-events-none">
         <Image
-          src="/assets/images/hero_pattern.png"
+          src={HeroPattern}
           alt=""
           fill
+          sizes="500px"
           className="object-contain"
         />
       </div>

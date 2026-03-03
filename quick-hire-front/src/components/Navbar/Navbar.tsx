@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getUserData } from "@/lib/auth";
 import LogoutBtn from "./LogoutBtn";
 import { CircleUserRound } from "lucide-react";
+import Logo from "@/assets/images/logos/quickhire-logo.png";
 
 const Navbar = async () => {
   const user = await getUserData();
@@ -12,14 +13,16 @@ const Navbar = async () => {
     <nav className="fixed top-0 left-0 w-full h-16 md:h-20 flex items-center justify-center px-5 md:px-10 bg-white/80 backdrop-blur-md border-b border-zinc-100 z-50">
       <div className="w-full max-w-[1200px] flex justify-between items-center">
         <div className="flex items-center gap-10">
-          <Link href="/" className="flex items-center">
+          <Link
+            href="/"
+            className="relative block w-[120px] md:w-[160px] h-[30px] md:h-[40px]"
+          >
             <Image
-              src="/assets/images/logos/quickhire-logo.png"
+              src={Logo}
               alt="QuickHire Logo"
-              width={160}
-              height={40}
-              className="w-[120px] md:w-[160px] h-auto"
-              priority
+              fill
+              sizes="160px"
+              className="object-contain"
             />
           </Link>
           <div className="hidden md:flex gap-8">

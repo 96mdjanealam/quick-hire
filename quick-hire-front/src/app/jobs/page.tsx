@@ -15,7 +15,7 @@ export default async function JobsPage() {
   }
 
   return (
-    <div className="max-w-[1200px] w-full mx-auto pt-[100px] px-5 md:px-10">
+    <div className="max-w-[1200px] w-full mx-auto pt-[100px] pb-[50px] px-5 md:px-10">
       <div className="mb-10">
         <h1 className="text-3xl md:text-5xl font-bold font-clash text-zinc-900 mb-4">
           All <span className="text-light-blue">opportunities</span>

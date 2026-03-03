@@ -1,6 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import HeroPattern from "@/assets/images/hero_pattern.png";
+import Underline from "@/assets/images/horizontal_line.png";
+import Person1 from "@/assets/images/person_1.png";
 
 const Header: React.FC = () => {
   return (
@@ -8,9 +11,10 @@ const Header: React.FC = () => {
       {/* Background Pattern - visible on all screen sizes */}
       <div className="absolute top-0 right-0 w-[80%] md:w-[50%] h-full z-0 opacity-30 md:opacity-60 pointer-events-none">
         <Image
-          src="/assets/images/hero_pattern.png"
+          src={HeroPattern}
           alt=""
           fill
+          sizes="50vw"
           className="object-contain"
         />
       </div>
@@ -21,14 +25,16 @@ const Header: React.FC = () => {
             more than <br />
             <span className="relative inline-block">
               <span className="text-light-blue">5000+ Jobs</span>
-              <div className="absolute -bottom-5 md:-bottom-6 left-0 w-full">
-                <Image
-                  src="/assets/images/horizontal_line.png"
-                  alt="Underline"
-                  width={400}
-                  height={12}
-                  className="w-full h-auto object-contain"
-                />
+              <div className="absolute -bottom-5 md:-bottom-6 left-0 w-full h-[12px]">
+                <div className="relative w-full h-full">
+                  <Image
+                    src={Underline}
+                    alt="Underline"
+                    fill
+                    sizes="400px"
+                    className="object-contain"
+                  />
+                </div>
               </div>
             </span>
           </h1>
@@ -51,13 +57,13 @@ const Header: React.FC = () => {
           </div>
         </div>
         <div className="hidden md:flex flex-1 relative justify-center md:justify-end items-center">
-          <div className="relative z-10 md:translate-x-5">
+          <div className="relative z-10 md:translate-x-5 w-[500px] h-[600px]">
             <Image
-              src="/assets/images/person_1.png"
+              src={Person1}
               alt="Person pointing at jobs"
-              width={500}
-              height={600}
-              priority
+              fill
+              sizes="500px"
+              className="object-contain"
             />
           </div>
         </div>

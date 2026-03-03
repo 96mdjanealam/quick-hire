@@ -3,6 +3,7 @@ import { getApplications } from "@/lib/api";
 import { Application } from "@/types/job";
 import { Mail, Briefcase, FileText, Calendar, Info } from "lucide-react";
 import DeleteApplicationButton from "@/components/DeleteApplicationButton/DeleteApplicationButton";
+import { Span } from "next/dist/trace";
 
 export default async function DashboardApplicationsPage() {
   let applications: Application[] = [];
@@ -53,7 +54,12 @@ export default async function DashboardApplicationsPage() {
                 </div>
                 <DeleteApplicationButton id={app._id} />
               </div>
-
+              {!app?.job_id?.title && (
+                <p className="text-sm italic mb-4 text-zinc-500">
+                  The job post associated with this application
+                  <span className="text-red-400"> might be deleted</span>
+                </p>
+              )}
               <div className="bg-zinc-50 rounded-lg p-3 border border-zinc-100 mb-4 flex flex-col gap-2">
                 <div className="flex items-start gap-2 text-sm text-zinc-600">
                   <Briefcase
@@ -63,9 +69,9 @@ export default async function DashboardApplicationsPage() {
                   <span>
                     Applied for{" "}
                     <span className="font-semibold text-zinc-800">
-                      {app.job_id.title}
+                      {app?.job_id?.title ?? "Unknown Job"}
                     </span>{" "}
-                    at {app.job_id.company}
+                    at {app?.job_id?.company ?? "Unknown Company"}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-zinc-600">

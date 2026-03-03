@@ -24,7 +24,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
   jobsCount,
 }) => {
   return (
-    <div className="p-4 sm:p-8 border border-zinc-100 rounded-sm flex flex-row sm:flex-col items-center sm:items-start gap-4 sm:gap-0 transition-all cursor-pointer group hover:shadow-lg hover:bg-primary hover:border-primary">
+    <div className="p-4 sm:p-8 border border-card-border rounded-sm flex flex-row sm:flex-col items-center sm:items-start gap-4 sm:gap-0 transition-all cursor-pointer group hover:shadow-lg hover:bg-primary hover:border-primary">
       <div className="p-3 rounded-lg sm:mb-6 bg-transparent text-primary group-hover:bg-white/10 group-hover:text-white transition-colors">
         <Icon size={28} strokeWidth={1.5} className="sm:w-8 sm:h-8" />
       </div>

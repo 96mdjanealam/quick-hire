@@ -34,11 +34,11 @@ export default async function FeaturedJobs() {
         </div>
 
         {jobs.length > 0 ? (
-          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto sm:overflow-visible pb-4 sm:pb-0 snap-x snap-mandatory hide-scrollbar -mx-5 px-5 sm:mx-0 sm:px-0">
+          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto sm:overflow-visible pb-4 sm:pb-0 snap-x snap-mandatory hide-scrollbar px-5 sm:px-0">
             {jobs.map((job) => (
               <div
                 key={job._id}
-                className="min-w-[280px] sm:min-w-0 shrink-0 snap-start"
+                className="w-[280px] sm:w-auto sm:min-w-0 shrink-0 snap-start"
               >
                 <JobCard job={job} />
               </div>

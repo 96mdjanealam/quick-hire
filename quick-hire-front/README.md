@@ -25,6 +25,22 @@ QuickHire is a modern job board application designed to connect employers with p
    npm install
    ```
 
+### Environment Variables
+
+Create a `.env` file in the root of the `quick-hire-front` directory with the following variables:
+
+```env
+BACKEND_API_URL=http://localhost:5000
+JWT_SECRET=your_jwt_secret_here
+```
+
+| Variable          | Description                                                    | Default                 |
+| :---------------- | :------------------------------------------------------------- | :---------------------- |
+| `BACKEND_API_URL` | URL of the QuickHire backend API                               | `http://localhost:5000` |
+| `JWT_SECRET`      | Secret key for JWT token verification (must match the backend) | —                       |
+
+> **Note:** The `JWT_SECRET` must be the same value used in the backend server for token verification to work correctly.
+
 ### Running Locally
 
 To start the development server:

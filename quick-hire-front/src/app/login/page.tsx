@@ -158,15 +158,12 @@ export default function LoginPage() {
           </div>
         </form>
 
-        {/* <div className="pt-6 mt-6 border-t border-gray-100 text-center text-sm">
-          <span className="text-gray-500">Don't have an account? </span>
-          <Link
-            href="/register"
-            className="font-semibold text-primary hover:text-primary-hover transition-colors"
-          >
-            Create an account
-          </Link>
-        </div> */}
+        <div className="pt-6 mt-6 border-t border-gray-100 text-center text-sm">
+          <span className="text-gray-500">
+            <strong>n.b.</strong> As it is an admin-only app, no registration is
+            available.
+          </span>
+        </div>
       </div>
     </div>
   );

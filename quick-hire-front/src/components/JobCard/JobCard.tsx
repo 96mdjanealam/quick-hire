@@ -42,7 +42,7 @@ export default function JobCard({ job, actionButton }: JobCardProps) {
   const catStyle = getCategoryStyle(job.category);
 
   return (
-    <div className="p-6 border border-zinc-100 rounded-sm flex flex-col gap-3 transition-all hover:shadow-lg hover:border-primary/20 bg-white group relative">
+    <div className="p-6 border border-card-border rounded-sm flex flex-col gap-3 transition-all hover:shadow-lg hover:border-primary/20 bg-white group relative">
       <Link href={`/jobs/${job._id}`} className="absolute inset-0 z-0"></Link>
 
       <div className="flex items-center justify-between z-10">
@@ -51,8 +51,8 @@ export default function JobCard({ job, actionButton }: JobCardProps) {
             <Image
               src={job.company_logo}
               alt={job.company}
-              width={48}
-              height={48}
+              fill
+              sizes="48px"
               className="object-contain"
             />
           ) : (
@@ -85,7 +85,7 @@ export default function JobCard({ job, actionButton }: JobCardProps) {
       {/* Category Tag */}
       <div className="flex flex-wrap gap-2 z-10 pointer-events-none">
         <span
-          className={`text-xs font-semibold px-3 py-1.5 rounded-full ${catStyle.bg} ${catStyle.text}`}
+          className={`px-3 py-1.5 rounded-full text-xs font-semibold ${catStyle.bg} ${catStyle.text} capitalize`}
         >
           {job.category}
         </span>

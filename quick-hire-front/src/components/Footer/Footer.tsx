@@ -11,12 +11,13 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {/* Brand */}
           <div className="flex flex-col gap-6">
-            <Link href="/">
+            <Link href="/" className="relative block w-[140px] h-[36px]">
               <Image
                 src={quickHireLogoDark}
                 alt="QuickHire Logo"
-                width={140}
-                height={36}
+                fill
+                sizes="140px"
+                className="object-contain"
               />
             </Link>
             <p className="text-zinc-400 text-sm leading-relaxed">

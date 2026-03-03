@@ -55,8 +55,8 @@ export default async function JobDetailsPage({
                         <Image
                           src={job.company_logo}
                           alt={job.company}
-                          width={48}
-                          height={48}
+                          fill
+                          sizes="48px"
                           className="object-contain"
                         />
                       ) : (
@@ -76,9 +76,9 @@ export default async function JobDetailsPage({
                         <span className="flex items-center gap-1.5">
                           <MapPin size={14} /> {job.location}
                         </span>
-                        <span className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-1.5 capitalize">
                           <Briefcase size={14} /> {job.category}
-                        </span>
+                        </div>
                       </div>
                     </div>
                   </div>
