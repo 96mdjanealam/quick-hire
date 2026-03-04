@@ -1,23 +1,54 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Trash2 } from "lucide-react";
 import { deleteApplicationAction } from "@/app/actions/applicationActions";
+import toast from "react-hot-toast";
 
 export default function DeleteApplicationButton({ id }: { id: string }) {
   const [loading, setLoading] = useState(false);
 
-  const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete this application?"))
-      return;
-
-    setLoading(true);
-    const result = await deleteApplicationAction(id);
-
-    if (result.error) {
-      alert(result.error);
-    }
-    setLoading(false);
+  const handleDelete = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toast(
+      (t) => (
+        <div className="flex flex-col gap-3">
+          <p className="font-medium">Delete this application?</p>
+          <p className="text-sm opacity-80">This action cannot be undone.</p>
+          <div className="flex justify-end gap-2">
+            <button
+              onClick={() => toast.dismiss(t.id)}
+              className="px-3 py-1.5 text-sm text-background rounded-md bg-zinc-600 hover:bg-zinc-500 transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={async () => {
+                toast.dismiss(t.id);
+                setLoading(true);
+                const result = await deleteApplicationAction(id);
+                if (result.error) {
+                  toast.error(result.error);
+                } else {
+                  toast.success("Application deleted successfully!");
+                }
+                setLoading(false);
+              }}
+              className="px-3 py-1.5 text-sm rounded-md bg-red-500 hover:bg-red-600 transition-colors text-white"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        id: `delete-application-${id}`,
+        duration: 3000,
+        style: {
+          maxWidth: "360px",
+        },
+      },
+    );
   };
 
   return (
@@ -28,7 +59,6 @@ export default function DeleteApplicationButton({ id }: { id: string }) {
       title="Delete Application"
     >
       <Trash2 size={16} />
-      {loading ? "Deleting..." : "Delete"}
     </button>
   );
 }

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { submitApplicationAction } from "@/app/actions/applicationActions";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function ApplicationForm({ jobId }: { jobId: string }) {
   const [formData, setFormData] = useState({
@@ -35,10 +36,11 @@ export default function ApplicationForm({ jobId }: { jobId: string }) {
 
     if (result.error) {
       setError(result.error);
+      toast.error(result.error);
     } else {
       setSuccess(true);
       setFormData({ name: "", email: "", resume_link: "", cover_note: "" });
-      // Optionally redirect or show a success message
+      toast.success("Application submitted successfully!");
       setTimeout(() => {
         router.push("/jobs");
       }, 3000);

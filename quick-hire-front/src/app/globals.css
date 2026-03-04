@@ -10,12 +10,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-epilogue);
   --font-mono: Courier, monospace;
-  --font-clash: 'Clash Display', sans-serif;
-  --color-primary: #4338CA;
-  --color-primary-hover: #3730A3;
-  --color-light-bg: #F8F8FD;
-  --color-light-blue: #26A4FF;
-  --color-card-border: #D6DDEB;
+  --font-clash: "Clash Display", sans-serif;
+  --color-primary: #4338ca;
+  --color-primary-hover: #3730a3;
+  --color-light-bg: #f8f8fd;
+  --color-light-blue: #26a4ff;
+  --color-card-border: #d6ddeb;
 }
 
 body {
@@ -30,4 +30,12 @@ body {
 .hide-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  cursor: pointer;
 }

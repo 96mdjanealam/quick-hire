@@ -30,8 +30,8 @@ export default function LoginPage() {
       setError(result.error);
       setPending(false);
     } else if (result?.success) {
-      // Refresh router and redirect to home
-      router.push("/");
+      // Refresh router and redirect to dashboard
+      router.push("/dashboard");
       router.refresh();
     }
   }

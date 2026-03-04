@@ -7,18 +7,18 @@ import Person1 from "@/assets/images/person_1.png";
 
 const Header: React.FC = () => {
   return (
-    <header className="w-full min-h-0 md:min-h-screen flex items-center justify-center px-5 md:px-10 pt-24 pb-10 md:pb-0 bg-light-bg overflow-hidden relative">
+    <header className="w-full flex items-end justify-center px-5 md:px-10 pt-36 pb-10 lg:pb-0 bg-light-bg overflow-hidden relative">
       <div className="absolute top-0 right-0 w-[80%] md:w-[50%] h-full z-0 opacity-30 md:opacity-60 pointer-events-none">
         <Image
           src={HeroPattern}
           alt=""
           fill
           sizes="50vw"
-          className="object-contain"
+          className="object-cover"
         />
       </div>
-      <div className="w-full max-w-[1200px] flex flex-col md:flex-row items-center justify-between gap-10">
-        <div className="flex-1 z-10">
+      <div className="w-full max-w-[1200px] flex flex-col md:flex-row items-center justify-between gap-10 md:flex-1">
+        <div className="flex-1 z-10 md:self-center">
           <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold font-clash leading-tight text-zinc-800 mb-8 md:mb-12 relative">
             Discover <br />
             more than <br />
@@ -55,7 +55,7 @@ const Header: React.FC = () => {
             </strong>
           </div>
         </div>
-        <div className="hidden md:flex flex-1 relative justify-center md:justify-end items-center">
+        <div className="hidden lg:flex flex-1 relative justify-center lg:justify-end items-end">
           <div className="relative z-10 md:translate-x-5 w-[500px] h-[600px]">
             <Image
               src={Person1}

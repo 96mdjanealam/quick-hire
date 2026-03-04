@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Image as ImageIcon } from "lucide-react";
 import { createJobAction } from "@/app/actions/jobActions";
+import toast from "react-hot-toast";
 
 export default function CreateJobPage() {
   const router = useRouter();
@@ -41,8 +42,10 @@ export default function CreateJobPage() {
 
     if (result.error) {
       setError(result.error);
+      toast.error(result.error);
       setLoading(false);
     } else {
+      toast.success("Job published successfully!");
       router.push("/dashboard/jobs");
     }
   };

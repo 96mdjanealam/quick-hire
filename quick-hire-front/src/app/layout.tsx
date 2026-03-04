@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import ConditionalLayout from "@/components/ConditionalLayout/ConditionalLayout";
+import ToasterProvider from "@/components/ToasterProvider/ToasterProvider";
 
 const epilogue = Epilogue({
   variable: "--font-epilogue",
@@ -30,6 +31,7 @@ export default function RootLayout({
         <title>QuickHire - Find Your Dream Job</title>
       </head>
       <body className={`${epilogue.variable} font-sans antialiased`}>
+        <ToasterProvider />
         <ConditionalLayout>
           <Navbar />
         </ConditionalLayout>
