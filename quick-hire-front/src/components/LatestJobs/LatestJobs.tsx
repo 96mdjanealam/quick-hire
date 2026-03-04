@@ -67,7 +67,10 @@ function JobRow({ job }: { job: Job }) {
   const catStyle = getCategoryStyle(job.category);
 
   return (
-    <div className="flex items-start sm:items-center gap-4 md:gap-6 p-4 md:p-6 bg-white border border-card-border rounded-sm hover:shadow-md hover:border-primary/20 transition-all cursor-pointer group">
+    <Link
+      href={`/jobs/${job._id}`}
+      className="flex items-start sm:items-center gap-4 md:gap-6 p-4 md:p-6 bg-white border border-card-border rounded-sm hover:shadow-md hover:border-primary/20 transition-all cursor-pointer group no-underline"
+    >
       {/* Logo */}
       <div className="w-12 h-12 md:w-16 md:h-16 relative rounded-lg overflow-hidden bg-zinc-50 shrink-0 flex items-center justify-center">
         {job.company_logo ? (
@@ -104,7 +107,7 @@ function JobRow({ job }: { job: Job }) {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

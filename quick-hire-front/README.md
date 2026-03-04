@@ -2,6 +2,11 @@
 
 QuickHire is a modern job board application designed to connect employers with potential candidates efficiently. This repository contains the frontend implementation built with Next.js.
 
+# Admin Credentials
+
+- Email: `admin@gmail.com`
+- Password: `123456`
+
 ## Tech Stack
 
 - **Framework:** [Next.js](https://nextjs.org/) (App Router)
