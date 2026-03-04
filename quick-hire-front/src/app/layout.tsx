@@ -35,7 +35,9 @@ export default function RootLayout({
         <ConditionalLayout>
           <Navbar />
         </ConditionalLayout>
-        <main className="min-h-screen bg-white">{children}</main>
+        <main className="min-h-screen bg-white flex flex-col">
+          <div className="flex-1">{children}</div>
+        </main>
         <ConditionalLayout>
           <Footer />
         </ConditionalLayout>
