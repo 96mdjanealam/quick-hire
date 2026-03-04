@@ -1,5 +1,7 @@
 # QuickHire - Frontend
 
+**Live Demo:** [https://quick-hire-front.vercel.app](https://quick-hire-front.vercel.app)
+
 QuickHire is a modern job board application designed to connect employers with potential candidates efficiently. This repository contains the frontend implementation built with Next.js.
 
 ### Admin Credentials
