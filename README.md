@@ -13,7 +13,6 @@ The project is organized into two main repositories/folders:
 
 ## Key Features
 
-- **Intuitive Job Discovery**: Search and filter through job listings with ease.
 - **Seamless Applications**: Quick and reliable application submission process.
 - **Robust Admin Dashboard**: Efficient management of job postings and candidate applications.
 - **Secure Authentication**: JWT-based security for all administrative actions.
