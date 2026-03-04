@@ -4,7 +4,7 @@
 
 QuickHire is a comprehensive, full-stack job board application designed to bridge the gap between talented professionals and forward-thinking companies. It features a sleek, responsive frontend and a powerful, scalable backend API.
 
-# Admin Credentials
+### Admin Credentials
 
 - Email: `admin@gmail.com`
 - Password: `123456`
