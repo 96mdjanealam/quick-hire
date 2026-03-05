@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import ConditionalLayout from "@/components/ConditionalLayout/ConditionalLayout";
 import ToasterProvider from "@/components/ToasterProvider/ToasterProvider";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const epilogue = Epilogue({
   variable: "--font-epilogue",
@@ -42,6 +43,7 @@ export default function RootLayout({
           <Footer />
         </ConditionalLayout>
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID ?? "G-KTQV959KC3"}/>
     </html>
   );
 }
