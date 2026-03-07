@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
               <input
                 type="email"
                 placeholder="Email Address"
-                className="flex-1 bg-white text-zinc-800 text-sm px-4 py-3 rounded-[4px] outline-none placeholder:text-zinc-400"
+                className="flex-1 bg-white text-zinc-800 text-sm px-4 py-3 rounded-[4px] outline-none placeholder:text-zinc-400 sm:max-w-30 md:max-w-full"
               />
               <button className="bg-primary text-white text-sm font-semibold px-6 py-3 rounded-[4px] hover:bg-primary-hover transition-colors">
                 Subscribe

@@ -18,7 +18,7 @@ const NavItem: React.FC<NavItemProps> = ({ href, icon: Icon, label }) => {
   return (
     <Link
       href={href}
-      className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 font-semibold text-sm ${
+      className={`flex items-center gap-3 px-4 py-3 rounded-[4px] transition-all duration-200 font-semibold text-sm ${
         isActive
           ? "bg-primary text-white shadow-md shadow-primary/20"
           : "text-zinc-600 hover:text-primary hover:bg-zinc-50"

@@ -7,7 +7,7 @@ import Person1 from "@/assets/images/person_1.png";
 
 const Header: React.FC = () => {
   return (
-    <header className="w-full flex items-end justify-center px-5 md:px-10 pt-36 pb-10 lg:pb-0 bg-light-bg overflow-hidden relative">
+    <header className="w-full flex items-end justify-center px-4 sm:px-6 md:px-10 pt-24 sm:pt-28 md:pt-36 pb-10 lg:pb-0 bg-light-bg overflow-hidden relative">
       <div className="absolute top-0 right-0 w-[80%] md:w-[50%] h-full z-0 opacity-30 md:opacity-60 pointer-events-none">
         <Image
           src={HeroPattern}
@@ -17,7 +17,7 @@ const Header: React.FC = () => {
           className="object-cover"
         />
       </div>
-      <div className="w-full max-w-[1200px] flex flex-col md:flex-row items-center justify-between gap-10 md:flex-1">
+      <div className="w-full max-w-[1200px] flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 md:gap-10 md:flex-1">
         <div className="flex-1 z-10 md:self-center">
           <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold font-clash leading-tight text-zinc-800 mb-8 md:mb-12 relative">
             Discover <br />
@@ -43,26 +43,26 @@ const Header: React.FC = () => {
           </p>
           <Link
             href="/jobs"
-            className="bg-primary text-white text-base md:text-lg font-semibold px-8 md:px-12 py-4 md:py-5 rounded-[4px] hover:bg-primary-hover transition-all transform hover:-translate-y-0.5"
+            className="inline-block bg-primary text-white text-base md:text-lg font-semibold px-8 md:px-12 py-4 md:py-5 rounded-[4px] hover:bg-primary-hover transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-md hover:shadow-lg hover:shadow-primary/25"
           >
             Browse Jobs
           </Link>
 
-          <div className="mt-8 text-sm text-zinc-400">
+          <div className="my-8 text-sm text-zinc-400">
             <span>Popular: </span>
             <strong className="text-zinc-600 ml-2">
               UI Designer, UX Researcher, Android, Admin
             </strong>
           </div>
         </div>
-        <div className="hidden lg:flex flex-1 relative justify-center lg:justify-end items-end">
-          <div className="relative z-10 md:translate-x-5 w-[500px] h-[600px]">
+        <div className="hidden lg:flex flex-1 relative justify-center lg:justify-end items-end self-end min-h-0">
+          <div className="relative z-10 lg:translate-x-5 w-full max-w-[400px] xl:max-w-[500px] h-[min(85vh,600px)] min-h-[400px]">
             <Image
               src={Person1}
               alt="Person pointing at jobs"
               fill
-              sizes="500px"
-              className="object-contain"
+              sizes="(min-width: 1280px) 500px, 400px"
+              className="object-contain object-bottom"
             />
           </div>
         </div>

@@ -18,7 +18,7 @@ export default function DeleteApplicationButton({ id }: { id: string }) {
           <div className="flex justify-end gap-2">
             <button
               onClick={() => toast.dismiss(t.id)}
-              className="px-3 py-1.5 text-sm text-background rounded-md bg-zinc-600 hover:bg-zinc-500 transition-colors"
+              className="px-3 py-1.5 text-sm text-background rounded-[4px] bg-zinc-600 hover:bg-zinc-500 transition-colors"
             >
               Cancel
             </button>
@@ -34,7 +34,7 @@ export default function DeleteApplicationButton({ id }: { id: string }) {
                 }
                 setLoading(false);
               }}
-              className="px-3 py-1.5 text-sm rounded-md bg-red-500 hover:bg-red-600 transition-colors text-white"
+              className="px-3 py-1.5 text-sm rounded-[4px] bg-red-500 hover:bg-red-600 transition-colors text-white"
             >
               Delete
             </button>
@@ -55,7 +55,7 @@ export default function DeleteApplicationButton({ id }: { id: string }) {
     <button
       onClick={handleDelete}
       disabled={loading}
-      className="p-2 bg-red-50 cursor-pointer text-red-600 rounded-md hover:bg-red-100 transition-colors disabled:opacity-50 flex items-center gap-2 text-sm font-semibold"
+      className="p-2 bg-red-50 cursor-pointer text-red-600 rounded-[4px] hover:bg-red-100 transition-colors disabled:opacity-50 flex items-center gap-2 text-sm font-semibold"
       title="Delete Application"
     >
       <Trash2 size={16} />

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { submitApplicationAction } from "@/app/actions/applicationActions";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -48,19 +49,23 @@ export default function ApplicationForm({ jobId }: { jobId: string }) {
     setLoading(false);
   };
 
+  const inputClasses =
+    "w-full border border-zinc-200 rounded-[4px] px-4 py-3 text-sm bg-white/80 backdrop-blur-sm transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:bg-white placeholder:text-zinc-400";
+
   if (success) {
     return (
-      <div className="bg-green-50 p-6 rounded-lg border border-green-100 text-center">
-        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <span className="text-xl text-green-600">✓</span>
+      <div className="bg-green-50/80 p-8 rounded-2xl border border-green-100 text-center">
+        <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mx-auto mb-5 shadow-sm">
+          <CheckCircle2 className="w-9 h-9 text-green-600" strokeWidth={2} />
         </div>
-        <h3 className="text-lg font-bold text-green-800 mb-2">
+        <h3 className="text-xl font-bold text-green-800 mb-2 font-clash">
           Application Submitted!
         </h3>
-        <p className="text-green-600">
+        <p className="text-green-700 leading-relaxed">
           We will review your application and get back to you soon.
         </p>
-        <p className="text-sm text-green-500 mt-2">
+        <p className="text-sm text-green-600 mt-4 flex items-center justify-center gap-2">
+          <Loader2 className="w-4 h-4 animate-spin shrink-0" />
           Redirecting to jobs page...
         </p>
       </div>
@@ -68,16 +73,19 @@ export default function ApplicationForm({ jobId }: { jobId: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       {error && (
-        <div className="bg-red-50 text-red-600 p-4 rounded-md text-sm border border-red-100">
-          {error}
+        <div className="bg-red-50/80 p-4 rounded-xl border border-red-100">
+          <p className="text-red-600 text-sm font-medium flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+            {error}
+          </p>
         </div>
       )}
 
-      <div className="flex flex-col gap-1.5">
+      <div className="space-y-2">
         <label htmlFor="name" className="text-sm font-semibold text-zinc-700">
-          Full Name
+          Full Name *
         </label>
         <input
           type="text"
@@ -86,14 +94,14 @@ export default function ApplicationForm({ jobId }: { jobId: string }) {
           required
           value={formData.name}
           onChange={handleChange}
-          className="border border-zinc-200 rounded-md px-4 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20"
+          className={inputClasses}
           placeholder="John Doe"
         />
       </div>
 
-      <div className="flex flex-col gap-1.5">
+      <div className="space-y-2">
         <label htmlFor="email" className="text-sm font-semibold text-zinc-700">
-          Email Address
+          Email Address *
         </label>
         <input
           type="email"
@@ -102,17 +110,17 @@ export default function ApplicationForm({ jobId }: { jobId: string }) {
           required
           value={formData.email}
           onChange={handleChange}
-          className="border border-zinc-200 rounded-md px-4 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20"
+          className={inputClasses}
           placeholder="john@example.com"
         />
       </div>
 
-      <div className="flex flex-col gap-1.5">
+      <div className="space-y-2">
         <label
           htmlFor="resume_link"
           className="text-sm font-semibold text-zinc-700"
         >
-          Resume Link (Google Drive, Dropbox, etc.)
+          Resume Link *
         </label>
         <input
           type="url"
@@ -121,17 +129,20 @@ export default function ApplicationForm({ jobId }: { jobId: string }) {
           required
           value={formData.resume_link}
           onChange={handleChange}
-          className="border border-zinc-200 rounded-md px-4 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20"
-          placeholder="https://docs.google.com/..."
+          className={inputClasses}
+          placeholder="https://docs.google.com/... or Dropbox, etc."
         />
+        <p className="text-xs text-zinc-500">
+          Google Drive, Dropbox, or other shareable link
+        </p>
       </div>
 
-      <div className="flex flex-col gap-1.5">
+      <div className="space-y-2">
         <label
           htmlFor="cover_note"
           className="text-sm font-semibold text-zinc-700"
         >
-          Cover Note
+          Cover Note *
         </label>
         <textarea
           id="cover_note"
@@ -140,7 +151,7 @@ export default function ApplicationForm({ jobId }: { jobId: string }) {
           value={formData.cover_note}
           onChange={handleChange}
           rows={4}
-          className="border border-zinc-200 rounded-md px-4 py-2 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 resize-none"
+          className={`${inputClasses} resize-y min-h-[100px]`}
           placeholder="Tell us why you're a great fit for this role..."
         />
       </div>
@@ -148,9 +159,19 @@ export default function ApplicationForm({ jobId }: { jobId: string }) {
       <button
         type="submit"
         disabled={loading}
-        className="mt-4 bg-primary text-white font-bold py-3 px-6 rounded-[4px] hover:bg-primary/90 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+        className="mt-2 w-full bg-primary text-white font-semibold py-3 px-6 rounded-[4px] hover:bg-primary-hover transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg shadow-primary/25 hover:shadow-primary/30 hover:-translate-y-0.5 active:translate-y-0"
       >
-        {loading ? "Submitting..." : "Submit Application"}
+        {loading ? (
+          <>
+            <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+            Submitting...
+          </>
+        ) : (
+          <>
+            <Send className="w-4 h-4 shrink-0" />
+            Submit Application
+          </>
+        )}
       </button>
     </form>
   );

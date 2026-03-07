@@ -4,7 +4,13 @@ import { ChangeEvent, SubmitEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { loginAction } from "@/app/actions/auth";
-import { Mail, Lock, ArrowRight, Loader2 } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  ArrowRight,
+  Loader2,
+  Sparkles,
+} from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -30,47 +36,58 @@ export default function LoginPage() {
       setError(result.error);
       setPending(false);
     } else if (result?.success) {
-      // Refresh router and redirect to dashboard
       router.push("/dashboard");
       router.refresh();
     }
   }
 
+  const inputClasses =
+    "block w-full pl-11 pr-4 py-3 border border-zinc-200 rounded-[4px] text-sm bg-white/80 backdrop-blur-sm transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:bg-white placeholder:text-zinc-400";
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-light-bg px-4 sm:px-6 lg:px-8 pt-24 pb-12">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-gray-100">
-        <div className="text-center">
-          <Link href="/" className="inline-block mb-6">
-            <span className="text-2xl font-bold font-clash text-primary">
+      <div className="max-w-md w-full bg-white rounded-2xl border border-zinc-200/80 shadow-xl shadow-zinc-200/50 overflow-hidden">
+        {/* Header */}
+        <div className="p-8 md:p-10 pb-6 text-center">
+          <Link
+            href="/"
+            className="inline-block mb-8 group"
+          >
+            <span className="text-2xl font-bold font-clash text-primary group-hover:text-primary-hover transition-colors">
               QuickHire
             </span>
           </Link>
-          <h2 className="text-3xl font-extrabold text-foreground font-clash tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-bold text-zinc-900 font-clash tracking-tight">
             Welcome Back
           </h2>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-1.5 text-[15px] text-zinc-500 leading-relaxed">
             Sign in to your QuickHire account to continue
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form
+          className="px-8 md:px-10 pb-8 md:pb-10 space-y-6"
+          onSubmit={handleSubmit}
+        >
           {error && (
-            <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-md text-sm animate-in fade-in slide-in-from-top-2">
-              <p className="font-medium">Authentication Failed</p>
-              <p>{error}</p>
+            <div className="bg-red-50/80 p-4 rounded-[4px] border border-red-100">
+              <p className="text-red-600 text-sm font-medium flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+                {error}
+              </p>
             </div>
           )}
 
           <div className="space-y-5">
-            <div>
+            <div className="space-y-2">
               <label
-                className="block text-sm font-medium text-gray-700 mb-1.5"
+                className="block text-sm font-semibold text-zinc-700"
                 htmlFor="email"
               >
                 Email Address
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-zinc-400">
                   <Mail size={18} />
                 </div>
                 <input
@@ -83,16 +100,16 @@ export default function LoginPage() {
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setEmail(e.target.value)
                   }
-                  className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-colors bg-gray-50 focus:bg-white"
+                  className={inputClasses}
                   placeholder="you@example.com"
                 />
               </div>
             </div>
 
-            <div>
-              <div className="flex items-center justify-between mb-1.5">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
                 <label
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-semibold text-zinc-700"
                   htmlFor="password"
                 >
                   Password
@@ -105,7 +122,7 @@ export default function LoginPage() {
                 </Link>
               </div>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-zinc-400">
                   <Lock size={18} />
                 </div>
                 <input
@@ -118,31 +135,32 @@ export default function LoginPage() {
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setPassword(e.target.value)
                   }
-                  className="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-colors bg-gray-50 focus:bg-white"
+                  className={inputClasses}
                   placeholder="••••••••"
                 />
               </div>
             </div>
           </div>
 
-          <div className="mt-6">
-            <div className="flex justify-end mb-4">
+          <div className="space-y-4">
+            <div className="flex justify-end">
               <button
                 type="button"
                 onClick={handleAdminAutocomplete}
-                className="text-xs cursor-pointer font-medium text-zinc-500 bg-zinc-100 px-3 py-1.5 rounded-[4px] hover:bg-zinc-200 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 bg-zinc-100 hover:bg-zinc-200 px-3 py-2 rounded-[4px] transition-colors"
               >
+                <Sparkles size={14} />
                 Auto-fill Admin Info
               </button>
             </div>
             <button
               type="submit"
               disabled={pending}
-              className={`group relative w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-lg text-sm font-semibold text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all ${pending ? "opacity-80 cursor-not-allowed" : "hover:shadow-md"}`}
+              className="group w-full flex justify-center items-center gap-2 py-3 px-6 rounded-[4px] text-sm font-semibold text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-primary/25 hover:shadow-primary/30 hover:-translate-y-0.5 active:translate-y-0"
             >
               {pending ? (
                 <>
-                  <Loader2 className="animate-spin" size={18} />
+                  <Loader2 className="w-5 h-5 animate-spin shrink-0" />
                   Signing in...
                 </>
               ) : (
@@ -150,7 +168,7 @@ export default function LoginPage() {
                   Sign In
                   <ArrowRight
                     size={18}
-                    className="group-hover:translate-x-1 transition-transform"
+                    className="shrink-0 group-hover:translate-x-1 transition-transform"
                   />
                 </>
               )}
@@ -158,11 +176,11 @@ export default function LoginPage() {
           </div>
         </form>
 
-        <div className="pt-6 mt-6 border-t border-gray-100 text-center text-sm">
-          <span className="text-gray-500">
-            <strong>n.b.</strong> As it is an admin-only app, no registration is
-            available.
-          </span>
+        <div className="px-8 md:px-10 pb-8 md:pb-10 pt-6 border-t border-zinc-100">
+          <p className="text-center text-sm text-zinc-500">
+            <strong className="font-semibold text-zinc-600">Note:</strong> This
+            is an admin-only app. No registration is available.
+          </p>
         </div>
       </div>
     </div>

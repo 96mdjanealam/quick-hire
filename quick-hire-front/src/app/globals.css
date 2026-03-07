@@ -38,4 +38,5 @@ input[type="submit"],
 input[type="button"],
 input[type="reset"] {
   cursor: pointer;
+  border-radius: 4px;
 }

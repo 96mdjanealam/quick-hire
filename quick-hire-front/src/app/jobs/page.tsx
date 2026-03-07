@@ -1,4 +1,4 @@
-import JobCard from "@/components/JobCard/JobCard";
+import JobsListWithFilter from "@/components/JobsListWithFilter/JobsListWithFilter";
 import { fetchJobs } from "@/lib/api";
 import { Job } from "@/types/job";
 
@@ -26,29 +26,7 @@ export default async function JobsPage() {
         </p>
       </div>
 
-      {error ? (
-        <div className="bg-red-50 text-red-600 p-6 rounded-lg border border-red-100 mb-8">
-          {error}
-        </div>
-      ) : jobs.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {jobs.map((job) => (
-            <JobCard key={job._id} job={job} />
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-24 bg-white rounded-xl border border-zinc-100">
-          <div className="w-16 h-16 bg-zinc-50 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-2xl">🔍</span>
-          </div>
-          <h3 className="text-xl font-bold text-zinc-900 mb-2">
-            No jobs found
-          </h3>
-          <p className="text-zinc-500">
-            Check back later for new opportunities.
-          </p>
-        </div>
-      )}
+      <JobsListWithFilter jobs={jobs} error={error} />
     </div>
   );
 }
