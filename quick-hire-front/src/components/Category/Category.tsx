@@ -11,6 +11,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
+import { fetchJobs } from "@/lib/api";
+import { Job } from "@/types/job";
 
 interface CategoryCardProps {
   icon: React.ElementType;
@@ -33,7 +35,6 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
           {title}
         </h3>
 
-        {/* On mobile: just text. On desktop: text + arrow in a flex row */}
         <div className="flex items-center justify-between w-full sm:mt-4">
           <span className="text-xs sm:text-sm text-zinc-500 group-hover:text-white/80 transition-colors">
             {jobsCount} jobs available
@@ -45,7 +46,6 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
         </div>
       </div>
 
-      {/* Mobile-only arrow (sits on the far right of the card) */}
       <ArrowRight
         size={20}
         className="sm:hidden transform group-hover:translate-x-1 transition-all text-zinc-400 group-hover:text-white shrink-0"
@@ -54,16 +54,38 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
   );
 };
 
-const Category: React.FC = () => {
+const Category = async () => {
+  let jobs: Job[] = [];
+  try {
+    const response = await fetchJobs();
+    jobs = response.data || [];
+  } catch (error) {
+    console.error("Failed to fetch jobs in Category component:", error);
+  }
+
+  const getJobCount = (categoryTitle: string) => {
+    return jobs.filter(
+      (job) => job.category?.toLowerCase() === categoryTitle.toLowerCase(),
+    ).length;
+  };
+
   const categories = [
-    { icon: Palette, title: "Design", jobsCount: 235 },
-    { icon: BarChart2, title: "Sales", jobsCount: 756 },
-    { icon: Megaphone, title: "Marketing", jobsCount: 140 },
-    { icon: Wallet, title: "Finance", jobsCount: 325 },
-    { icon: Monitor, title: "Technology", jobsCount: 436 },
-    { icon: Code, title: "Engineering", jobsCount: 542 },
-    { icon: Briefcase, title: "Business", jobsCount: 211 },
-    { icon: Users, title: "Human Resource", jobsCount: 346 },
+    { icon: Palette, title: "Design", jobsCount: getJobCount("Design") },
+    { icon: BarChart2, title: "Sales", jobsCount: getJobCount("Sales") },
+    {
+      icon: Megaphone,
+      title: "Marketing",
+      jobsCount: getJobCount("Marketing"),
+    },
+    { icon: Wallet, title: "Finance", jobsCount: getJobCount("Finance") },
+    {
+      icon: Monitor,
+      title: "Technology",
+      jobsCount: getJobCount("Technology"),
+    },
+    { icon: Code, title: "Engineering", jobsCount: getJobCount("Engineering") },
+    { icon: Briefcase, title: "Business", jobsCount: getJobCount("Business") },
+    { icon: Users, title: "Software", jobsCount: getJobCount("Software") },
   ];
 
   return (
@@ -84,7 +106,13 @@ const Category: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((cat, index) => (
-            <CategoryCard key={index} {...cat} />
+            <Link
+              key={index}
+              href={`/jobs?category=${cat.title.toLowerCase()}`}
+              className="block"
+            >
+              <CategoryCard {...cat} />
+            </Link>
           ))}
         </div>
       </div>

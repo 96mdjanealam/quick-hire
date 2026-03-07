@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, Suspense } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import JobCard from "@/components/JobCard/JobCard";
 import { Job } from "@/types/job";
 import { ChevronDown } from "lucide-react";
@@ -21,13 +22,28 @@ interface JobsListWithFilterProps {
   error?: string | null;
 }
 
-export default function JobsListWithFilter({ jobs, error }: JobsListWithFilterProps) {
+export function JobsListWithFilterContent({
+  jobs,
+  error,
+}: JobsListWithFilterProps) {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (categoryParam) {
+      setSelectedCategory(categoryParam.toLowerCase());
+      router.replace(pathname, { scroll: false });
+    }
+  }, [categoryParam, router, pathname]);
+
   const categories = useMemo(() => {
     const unique = new Set(
-      jobs.map((j) => j.category?.toLowerCase()).filter(Boolean)
+      jobs.map((j) => j.category?.toLowerCase()).filter(Boolean),
     );
     return Array.from(unique).sort();
   }, [jobs]);
@@ -35,7 +51,7 @@ export default function JobsListWithFilter({ jobs, error }: JobsListWithFilterPr
   const filteredJobs = useMemo(() => {
     if (selectedCategory === "all") return jobs;
     return jobs.filter(
-      (j) => j.category?.toLowerCase() === selectedCategory.toLowerCase()
+      (j) => j.category?.toLowerCase() === selectedCategory.toLowerCase(),
     );
   }, [jobs, selectedCategory]);
 
@@ -47,68 +63,68 @@ export default function JobsListWithFilter({ jobs, error }: JobsListWithFilterPr
   return (
     <div className="space-y-6">
       {jobs.length > 0 && (
-      <div className="flex flex-wrap items-center gap-3">
-        <span className="text-sm font-medium text-zinc-500">Filter by:</span>
-        <div className="relative">
-          <button
-            type="button"
-            onClick={() => setIsOpen((o) => !o)}
-            className="flex items-center gap-2 px-4 py-2.5 bg-white border border-zinc-200 rounded-lg text-sm font-medium text-zinc-700 hover:border-zinc-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-          >
-            {displayLabel}
-            <ChevronDown
-              size={16}
-              className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-
-          {isOpen && (
-            <>
-              <div
-                className="fixed inset-0 z-10"
-                aria-hidden="true"
-                onClick={() => setIsOpen(false)}
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="text-sm font-medium text-zinc-500">Filter by:</span>
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setIsOpen((o) => !o)}
+              className="flex items-center gap-2 px-4 py-2.5 bg-white border border-zinc-200 rounded-lg text-sm font-medium text-zinc-700 hover:border-zinc-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+            >
+              {displayLabel}
+              <ChevronDown
+                size={16}
+                className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
               />
-              <div className="absolute left-0 top-full mt-1 z-20 w-48 py-1 bg-white border border-zinc-200 rounded-lg shadow-lg">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedCategory("all");
-                    setIsOpen(false);
-                  }}
-                  className={`w-full text-left px-4 py-2.5 text-sm ${
-                    selectedCategory === "all"
-                      ? "bg-primary/10 text-primary font-semibold"
-                      : "text-zinc-700 hover:bg-zinc-50"
-                  }`}
-                >
-                  All categories
-                </button>
-                {categories.map((cat) => (
+            </button>
+
+            {isOpen && (
+              <>
+                <div
+                  className="fixed inset-0 z-10"
+                  aria-hidden="true"
+                  onClick={() => setIsOpen(false)}
+                />
+                <div className="absolute left-0 top-full mt-1 z-20 w-48 py-1 bg-white border border-zinc-200 rounded-lg shadow-lg">
                   <button
-                    key={cat}
                     type="button"
                     onClick={() => {
-                      setSelectedCategory(cat);
+                      setSelectedCategory("all");
                       setIsOpen(false);
                     }}
-                    className={`w-full text-left px-4 py-2.5 text-sm capitalize ${
-                      selectedCategory === cat
+                    className={`w-full text-left px-4 py-2.5 text-sm ${
+                      selectedCategory === "all"
                         ? "bg-primary/10 text-primary font-semibold"
                         : "text-zinc-700 hover:bg-zinc-50"
                     }`}
                   >
-                    {CATEGORY_LABELS[cat] || cat}
+                    All categories
                   </button>
-                ))}
-              </div>
-            </>
-          )}
+                  {categories.map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => {
+                        setSelectedCategory(cat);
+                        setIsOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2.5 text-sm capitalize ${
+                        selectedCategory === cat
+                          ? "bg-primary/10 text-primary font-semibold"
+                          : "text-zinc-700 hover:bg-zinc-50"
+                      }`}
+                    >
+                      {CATEGORY_LABELS[cat] || cat}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+          <span className="text-sm text-zinc-400">
+            {filteredJobs.length} job{filteredJobs.length !== 1 ? "s" : ""}
+          </span>
         </div>
-        <span className="text-sm text-zinc-400">
-          {filteredJobs.length} job{filteredJobs.length !== 1 ? "s" : ""}
-        </span>
-      </div>
       )}
 
       {error ? (
@@ -147,5 +163,15 @@ export default function JobsListWithFilter({ jobs, error }: JobsListWithFilterPr
         </div>
       )}
     </div>
+  );
+}
+
+export default function JobsListWithFilter(props: JobsListWithFilterProps) {
+  return (
+    <Suspense
+      fallback={<div className="text-center py-12">Loading filters...</div>}
+    >
+      <JobsListWithFilterContent {...props} />
+    </Suspense>
   );
 }
