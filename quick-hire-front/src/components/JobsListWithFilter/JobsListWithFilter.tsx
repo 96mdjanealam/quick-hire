@@ -4,7 +4,7 @@ import { useMemo, useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import JobCard from "@/components/JobCard/JobCard";
 import { Job } from "@/types/job";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, SearchSlash } from "lucide-react";
 
 const CATEGORY_LABELS: Record<string, string> = {
   software: "Software",
@@ -151,8 +151,8 @@ export function JobsListWithFilterContent({
         </div>
       ) : (
         <div className="text-center py-24 bg-white rounded-xl border border-zinc-100">
-          <div className="w-16 h-16 bg-zinc-50 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-2xl">🔍</span>
+          <div className="w-16 h-16 bg-zinc-50 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+            <SearchSlash size={28} />
           </div>
           <h3 className="text-xl font-bold text-zinc-900 mb-2">
             No jobs in this category
