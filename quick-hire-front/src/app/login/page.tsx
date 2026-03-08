@@ -10,6 +10,8 @@ import {
   ArrowRight,
   Loader2,
   Sparkles,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 
 export default function LoginPage() {
@@ -18,6 +20,7 @@ export default function LoginPage() {
   const [pending, setPending] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleAdminAutocomplete = () => {
     setEmail("admin@gmail.com");
@@ -42,7 +45,7 @@ export default function LoginPage() {
   }
 
   const inputClasses =
-    "block w-full pl-11 pr-4 py-3 border border-zinc-200 rounded-[4px] text-sm bg-white/80 backdrop-blur-sm transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:bg-white placeholder:text-zinc-400";
+    "block w-full pl-11 pr-11 py-3 border border-zinc-200 rounded-[4px] text-sm bg-white/80 backdrop-blur-sm transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 focus:bg-white placeholder:text-zinc-400";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-light-bg px-4 sm:px-6 lg:px-8 pt-24 pb-12">
@@ -87,7 +90,7 @@ export default function LoginPage() {
                 Email Address
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-zinc-400">
+                <div className="absolute z-10 inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-zinc-400">
                   <Mail size={18} />
                 </div>
                 <input
@@ -122,13 +125,13 @@ export default function LoginPage() {
                 </Link>
               </div>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-zinc-400">
+                <div className="absolute z-10 inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-zinc-400">
                   <Lock size={18} />
                 </div>
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   autoComplete="current-password"
                   required
                   value={password}
@@ -138,6 +141,13 @@ export default function LoginPage() {
                   className={inputClasses}
                   placeholder="••••••••"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-zinc-400 hover:text-zinc-600 transition-colors"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </div>
             </div>
           </div>
@@ -176,11 +186,17 @@ export default function LoginPage() {
           </div>
         </form>
 
-        <div className="px-8 md:px-10 pb-8 md:pb-10 pt-6 border-t border-zinc-100">
-          <p className="text-center text-sm text-zinc-500">
-            <strong className="font-semibold text-zinc-600">Note:</strong> This
-            is an admin-only app. No registration is available.
-          </p>
+        <div className="px-8 md:px-10 pb-6 pt-6 bg-zinc-50 border-t border-t-zinc-100">
+          
+            <p className="text-sm text-zinc-600 text-center">
+              <span className="font-semibold text-zinc-800">N.B.</span> — use credentials below or click the auto-fill button.
+            </p>
+            <div className="mt-2 flex flex-col sm:flex-row items-center justify-center gap-x-4 gap-y-1 text-xs text-zinc-500">
+              <span><span className="font-medium text-zinc-700">Email:</span> admin@gmail.com</span>
+              <span className="hidden sm:inline">·</span>
+              <span><span className="font-medium text-zinc-700">Password:</span> 123456</span>
+            </div>
+          
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 
 export interface IUserData {
   id: string;
+  role?: string;
 }
 
 /**
@@ -49,5 +50,5 @@ export async function getUserData(): Promise<IUserData | null> {
     return null;
   }
 
-  return { id: decoded.id };
+  return { id: decoded.id, role: decoded.role };
 }

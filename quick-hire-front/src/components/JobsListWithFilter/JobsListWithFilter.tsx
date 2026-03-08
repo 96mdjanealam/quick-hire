@@ -4,7 +4,8 @@ import { useMemo, useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import JobCard from "@/components/JobCard/JobCard";
 import { Job } from "@/types/job";
-import { ChevronDown, SearchSlash } from "lucide-react";
+import { ChevronDown, Search, SearchSlash } from "lucide-react";
+import DeleteJobButton from "../DeleteJobButton/DeleteJobButton";
 
 const CATEGORY_LABELS: Record<string, string> = {
   software: "Software",
@@ -20,11 +21,13 @@ const CATEGORY_LABELS: Record<string, string> = {
 interface JobsListWithFilterProps {
   jobs: Job[];
   error?: string | null;
+  showActions?: boolean;
 }
 
 export function JobsListWithFilterContent({
   jobs,
   error,
+  showActions = false,
 }: JobsListWithFilterProps) {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get("category");
@@ -33,6 +36,7 @@ export function JobsListWithFilterContent({
 
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     if (categoryParam) {
@@ -49,11 +53,28 @@ export function JobsListWithFilterContent({
   }, [jobs]);
 
   const filteredJobs = useMemo(() => {
-    if (selectedCategory === "all") return jobs;
-    return jobs.filter(
-      (j) => j.category?.toLowerCase() === selectedCategory.toLowerCase(),
-    );
-  }, [jobs, selectedCategory]);
+    let result = jobs;
+
+    // Filter by category
+    if (selectedCategory !== "all") {
+      result = result.filter(
+        (j) => j.category?.toLowerCase() === selectedCategory.toLowerCase()
+      );
+    }
+
+    // Filter by search query (title, company, location)
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase().trim();
+      result = result.filter(
+        (j) =>
+          j.title?.toLowerCase().includes(query) ||
+          j.company?.toLowerCase().includes(query) ||
+          j.location?.toLowerCase().includes(query)
+      );
+    }
+
+    return result;
+  }, [jobs, selectedCategory, searchQuery]);
 
   const displayLabel =
     selectedCategory === "all"
@@ -64,6 +85,29 @@ export function JobsListWithFilterContent({
     <div className="space-y-6">
       {jobs.length > 0 && (
         <div className="flex flex-wrap items-center gap-3">
+          {/* Search Input */}
+          <div className="relative flex-1 min-w-[200px] max-w-md">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400">
+              <Search size={18} />
+            </div>
+            <input
+              type="text"
+              placeholder="Search by title, company, location..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 bg-white border border-zinc-200 rounded-sm text-sm text-zinc-700 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
+              >
+                ×
+              </button>
+            )}
+          </div>
+
           <span className="text-sm font-medium text-zinc-500">Filter by:</span>
           <div className="relative">
             <button
@@ -123,6 +167,7 @@ export function JobsListWithFilterContent({
           </div>
           <span className="text-sm text-zinc-400">
             {filteredJobs.length} job{filteredJobs.length !== 1 ? "s" : ""}
+            {searchQuery && ` found`}
           </span>
         </div>
       )}
@@ -134,7 +179,11 @@ export function JobsListWithFilterContent({
       ) : filteredJobs.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredJobs.map((job) => (
-            <JobCard key={job._id} job={job} />
+            <JobCard
+              key={job._id}
+              job={job}
+              actionButton={showActions ? <DeleteJobButton id={job._id}/> : undefined}
+            />
           ))}
         </div>
       ) : jobs.length === 0 ? (
@@ -158,7 +207,9 @@ export function JobsListWithFilterContent({
             No jobs in this category
           </h3>
           <p className="text-zinc-500">
-            Try selecting a different category or check back later.
+            {searchQuery
+              ? "No jobs match your search criteria."
+              : "Try selecting a different category or check back later."}
           </p>
         </div>
       )}
@@ -175,3 +226,4 @@ export default function JobsListWithFilter(props: JobsListWithFilterProps) {
     </Suspense>
   );
 }
+

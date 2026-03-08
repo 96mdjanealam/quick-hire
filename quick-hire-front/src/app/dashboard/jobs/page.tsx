@@ -5,6 +5,7 @@ import { fetchJobs } from "@/lib/api";
 import { Job } from "@/types/job";
 import JobCard from "@/components/JobCard/JobCard";
 import DeleteJobButton from "@/components/DeleteJobButton/DeleteJobButton";
+import JobsListWithFilter from "@/components/JobsListWithFilter/JobsListWithFilter";
 
 export default async function DashboardJobsPage() {
   let jobs: Job[] = [];
@@ -43,15 +44,7 @@ export default async function DashboardJobsPage() {
           {error}
         </div>
       ) : jobs.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {jobs.map((job) => (
-            <JobCard
-              key={job._id}
-              job={job}
-              actionButton={<DeleteJobButton id={job._id} />}
-            />
-          ))}
-        </div>
+        <JobsListWithFilter jobs={jobs} error={error} showActions={true} />
       ) : (
         <div className="text-center py-16 bg-white border border-zinc-200 rounded-xl border-dashed">
           <p className="text-zinc-500 mb-4">No jobs found.</p>

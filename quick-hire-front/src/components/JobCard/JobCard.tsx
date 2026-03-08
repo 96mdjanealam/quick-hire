@@ -42,7 +42,7 @@ export default function JobCard({ job, actionButton }: JobCardProps) {
   const catStyle = getCategoryStyle(job.category);
 
   return (
-    <div className="p-6 border border-card-border rounded-sm flex flex-col gap-3 transition-all hover:shadow-lg hover:border-primary/20 bg-white group relative">
+    <div className="p-6 border h-full border-card-border rounded-sm flex flex-col gap-3 transition-all hover:shadow-lg hover:border-primary/20 bg-white group relative">
       <Link href={`/jobs/${job._id}`} className="absolute inset-0 z-0"></Link>
 
       <div className="flex items-center justify-between z-10">
